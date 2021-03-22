@@ -1,0 +1,20 @@
+{
+  "name": "shoestorm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html -p 3000 --open",
+    "build": "parcel build index.html --out-dir bulidDist --public-url ./"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "EventDispatcher": "^2.0.1",
+    "parcel-bundler": "^1.12.5",
+    "three": "^0.126.1",
+    "three-decal-geometry": "^1.0.0",
+    "three-dragcontrols": "^0.88.2"
+  }
+}
