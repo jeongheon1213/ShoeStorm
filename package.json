@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel index.html --port=3000 --open --out-dir start",
-    "build": "parcel build index.html --out-dir bulidDist --public-url ./"
+    "build": "parcel build index.html --out-dir bulidDist --public-url ./",
+    "build-lib" : "parcel build --public-url . ./js/lib.js --out-dir docs/dist --global myLib"
   },
   "author": "",
   "license": "ISC",
