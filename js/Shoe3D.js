@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Vector3 } from 'three';
+import { Euler, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
@@ -93,7 +93,7 @@ class Shoe3D {
 
             const intersects = self.raycaster.intersectObjects(self.objList, true);
             if (intersects.length > 0) {
-                self.sphereInter.visible = true;
+                // self.sphereInter.visible = true;
                 self.sphereInter.position.copy(intersects[0].point);
                 self.createLinePixel(intersects[0]);
             } else {
@@ -106,13 +106,9 @@ class Shoe3D {
 
         // 광선투시 결과물에  위치에 점을 찍는다
         createLinePixel(intersect) {
-        
-            let geometry = new DecalGeometry(intersect.object, intersect.point, new THREE.Euler(0, 0, 0, 'XYZ'), new Vector3(0.1, 0.1, 0.1));
+            let geometry = new DecalGeometry(intersect.object, intersect.point, new Euler(0,1,0), new Vector3(0.01, 0.01, 0.01));
             let material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
             let plane = new THREE.Mesh( geometry, material );
-            plane.position.x = intersect.point.x;
-            plane.position.y = intersect.point.y;
-            plane.position.z = intersect.point.z;
             self.scene.add( plane );
         }
 }
