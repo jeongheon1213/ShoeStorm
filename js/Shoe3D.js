@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
@@ -32,7 +33,7 @@ class Shoe3D {
         renderer.setSize(window.innerWidth, window.innerHeight);
         this.target.appendChild(renderer.domElement);
 
-        const geometry = new THREE.BoxGeometry();
+        const geometry = new THREE.BoxGeometry(5,5,5);
         const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
         const cube = new THREE.Mesh(geometry, material);
         this.scene.add(cube);
@@ -94,6 +95,7 @@ class Shoe3D {
             if (intersects.length > 0) {
                 self.sphereInter.visible = true;
                 self.sphereInter.position.copy(intersects[0].point);
+                self.createLinePixel(intersects[0]);
             } else {
                 self.sphereInter.visible = false;
             }
@@ -101,6 +103,18 @@ class Shoe3D {
             renderer.render(self.scene, self.camera);
         }
     }
+
+        // 광선투시 결과물에  위치에 점을 찍는다
+        createLinePixel(intersect) {
+        
+            let geometry = new DecalGeometry(intersect.object, intersect.point, new THREE.Euler(0, 0, 0, 'XYZ'), new Vector3(0.1, 0.1, 0.1));
+            let material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+            let plane = new THREE.Mesh( geometry, material );
+            plane.position.x = intersect.point.x;
+            plane.position.y = intersect.point.y;
+            plane.position.z = intersect.point.z;
+            self.scene.add( plane );
+        }
 }
 
 export default Shoe3D;
